@@ -7,12 +7,56 @@ function getRandomIntInclusive(min, max)
     return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
+//  存在している馬名かどうかを返す
+function isExistingUmaName(umaName)
+{
+    for(var listUmaName of allUmaData)
+    {
+        if(listUmaName == umaName)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//  対象の馬名の文字ごとにMatch, Near, Noneのラベルを付けたものを返す
+function getUmaNameMatchLabels(targetUmaName, inputUmaName)
+{
+    var letterLabels = [];
+
+    for(i = 0; i < inputUmaName.length; ++i)
+    {
+        var inputLetter = inputUmaName[i];
+        var targetLetter = targetUmaName[i];
+
+        if(targetLetter === undefined)
+        {
+            letterLabels.push({index: i, letter: inputLetter, label: "None"});
+        }
+        else if(inputLetter == targetLetter)
+        {
+            letterLabels.push({index: i, letter: inputLetter, label: "Match"});
+        }
+        else if(targetUmaName.indexOf(inputLetter) > 0)
+        {
+            letterLabels.push({index: i, letter: inputLetter, label: "Near"});
+        }
+        else
+        {
+            letterLabels.push({index: i, letter: inputLetter, label: "None"});
+        }
+    }
+
+    return letterLabels;
+}
 
 //  Vueのオブジェクト
 var app = new Vue({ 
     el: '#app',
     data:
     {
+        message: "",    //  ユーザーへのメッセージ
         randomNumber: 0,
         targetUmaName: "Uma",   //  答えの馬の名前
         raceNumber: 1,  //  レース番号、最大12Rまで
@@ -38,8 +82,24 @@ var app = new Vue({
         //  入力をチェックする関数
         checkInput: function()
         {
-            this.inputUmaNameList.push(this.currentInputUmaName);
+            //  存在する馬名かどうかチェックする
+            var exists = isExistingUmaName(this.currentInputUmaName);
 
+            if(exists)
+            {
+                this.message = "存在する馬名です";
+            }
+            else
+            {
+                this.message = "エラー、存在しない馬名です";
+                return;
+            }
+
+            var letterLabels = getUmaNameMatchLabels(this.targetUmaName, this.currentInputUmaName);
+
+            this.message = letterLabels;
+
+            this.inputUmaNameList.push(this.currentInputUmaName);
         },
     }
 });

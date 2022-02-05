@@ -12,6 +12,45 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="data/extractdata3.js"></script>
 
+    <style rel="stylesheet">
+      span.matchLetter
+      {
+        margin: 2px;
+        padding: 10px;
+        background-color: rgb(87, 199, 92);
+        border: 1px solid black;
+        color: white;
+        font-family: monospace;
+      }
+      span.nullLetter
+      {
+        margin: 2px;
+        padding: 10px;
+        background-color: white;
+        border: 1px solid black;
+        color: white;
+        font-family: monospace;
+      }
+      span.nearLetter
+      {
+        margin: 2px;
+        padding: 10px;
+        background-color: rgb(240, 192, 62);
+        border: 1px solid black;
+        color: white;
+        font-family: monospace;
+      }
+      span.noneLetter
+      {
+        margin: 2px;
+        padding: 10px;
+        background-color: lightgrey;
+        border: 1px solid black;
+        color: white;
+        font-family: monospace;
+      }
+    </style>
+
     <title>Umardle</title>
   </head>
   <body>
@@ -19,21 +58,21 @@
           <div class="row">
               <div class="col">
                 <h1>Umardle</h1>
-                <p>WordleのG1勝利馬バージョン</p>
-                <p>{{targetUmaName}} {{randomNumber}}</p>
+                <p>WordleのG1勝利馬バージョン（※1984年以降の芝・ダートG1レースのみ）</p>
+                <p>答え：{{targetUmaName}}</p>
               </div>
           </div>
           <div class="row">
             <h2 class="col">
-                <button type="button" class="btn btn-primary">最初から</button>
+                <button type="button" class="btn btn-primary" v-on:click="reset">最初から</button>
             </h2>
           </div>
           <div class="row">
               <div class="col">
-                  <p id="message">Message</p>
-                  <p id="okWord"><span class="bg-success">A</span></p>
-                  <p id="nearWord"><span class="bg-success">A</span></p>
-                  <p id="ngWord"><span class="bg-success">A</span></p>
+                  <p id="message">{{message}}</p>
+                  <p id="okWord"><span class="matchLetter">ナ</span><span class="matchLetter">リ</span><span class="nullLetter">？</span></p>
+                  <p id="nearWord"><span class="nearLetter">あ</span></p>
+                  <p id="ngWord"><span class="noneLetter">う</span></p>
                 </div>
           </div>
           <div class="row">
