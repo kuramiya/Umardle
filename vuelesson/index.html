@@ -6,7 +6,17 @@
     <body>
         
         <div id="app">
-            {{ message }}
+            <p>{{ message }}</p>
+            <p><span v-if="seen">show it</span></p>
+            <button v-on:click="runAction">Action {{actNumber}}</button>
+            <p><input v-model="myInput"/> {{myInput}}</p>
+            <ol>
+                <todo-item
+                  v-for="item in groceryList"
+                  v-bind:todo="item"
+                  v-bind:key="item.id"
+                ></todo-item>
+            </ol>
         </div>
         
         <script src="index.js"></script>
