@@ -40,12 +40,21 @@
               <div class="col">
                   <h2 id="raceNumberName">第{{raceNumber}}レース</h2>
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="馬名（カタカナ2～9文字）">
-                    <button class="btn btn-outline-primary" type="button" id="button-1R">出走</button>
+                    <input type="text" class="form-control" placeholder="馬名（カタカナ2～9文字）" v-model="currentInputUmaName">
+                    <button class="btn btn-outline-primary" type="button" v-on:click="checkInput">出走</button>
                   </div>
+                  <p>{{currentInputUmaName}}</p>
               </div>
           </div>
-
+          <div class="row">
+            <div class="col">
+              <ol>
+                <li v-for="umaName in inputUmaNameList">
+                  {{umaName}}
+                </li>
+              </ol>  
+            </div>
+          </div>
       </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -17,8 +17,10 @@ Wordle uma version
 
 # 参考サイト
 
-## Vue.js
+## G1レース勝利馬
+https://www.jra.go.jp/datafile/seiseki/replay/2022/g1.html
 
+## Vue.js
 https://jp.vuejs.org/v2/guide/index.html
 
 # JavaScript基礎
@@ -28,5 +30,8 @@ https://jp.vuejs.org/v2/guide/index.html
 
 ## 乱数
 https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+
+## リストに挿入する
+https://maku77.github.io/js/array/push.html
 
 

@@ -16,7 +16,8 @@ var app = new Vue({
         randomNumber: 0,
         targetUmaName: "Uma",   //  答えの馬の名前
         raceNumber: 1,  //  レース番号、最大12Rまで
-        currentInputUmaName: ""  //  現在入力された馬の名前
+        currentInputUmaName: "",  //  現在入力された馬の名前
+        inputUmaNameList: [],   //  入力された馬の名前リスト
     },
     methods:
     {
@@ -37,6 +38,7 @@ var app = new Vue({
         //  入力をチェックする関数
         checkInput: function()
         {
+            this.inputUmaNameList.push(this.currentInputUmaName);
 
         },
     }
