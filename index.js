@@ -20,7 +20,7 @@ function isExistingUmaName(umaName)
     return false;
 }
 
-//  対象の馬名の文字ごとにMatch, Near, Noneのラベルを付けたものを返す
+//  対象の馬名の文字ごとにMatch, Near, Missのラベルを付けたものを返す
 function getUmaNameMatchLabels(targetUmaName, inputUmaName)
 {
     var letterLabels = [];
@@ -32,7 +32,7 @@ function getUmaNameMatchLabels(targetUmaName, inputUmaName)
 
         if(targetLetter === undefined)
         {
-            letterLabels.push({index: i, letter: inputLetter, label: "None"});
+            letterLabels.push({index: i, letter: inputLetter, label: "Miss"});
         }
         else if(inputLetter == targetLetter)
         {
@@ -44,12 +44,19 @@ function getUmaNameMatchLabels(targetUmaName, inputUmaName)
         }
         else
         {
-            letterLabels.push({index: i, letter: inputLetter, label: "None"});
+            letterLabels.push({index: i, letter: inputLetter, label: "Miss"});
         }
     }
 
     return letterLabels;
 }
+
+//  文字表示用のコンポーネント
+Vue.component("letter-component",
+{
+    props: ["label", "inputLetter"],
+    template: '<span class="{{label}}Letter">{{inputLetter}}</span>',
+})
 
 //  Vueのオブジェクト
 var app = new Vue({ 
@@ -57,11 +64,19 @@ var app = new Vue({
     data:
     {
         message: "",    //  ユーザーへのメッセージ
-        randomNumber: 0,
         targetUmaName: "Uma",   //  答えの馬の名前
         raceNumber: 1,  //  レース番号、最大12Rまで
         currentInputUmaName: "",  //  現在入力された馬の名前
-        inputUmaNameList: [],   //  入力された馬の名前リスト
+        inputHistories: [],   //  入力履歴
+        matchLetters: [],
+        nearLetters: [],
+        missLetters: [],
+        xxxLetters:
+        [
+            {index: 0, letter: "ナ", label: "Match"},
+            {index: 1, letter: "リ", label: "Match"},
+            {index: 2, letter: "タ", label: "Near"},
+        ],
     },
     methods:
     {
@@ -98,8 +113,9 @@ var app = new Vue({
             var letterLabels = getUmaNameMatchLabels(this.targetUmaName, this.currentInputUmaName);
 
             this.message = letterLabels;
+            this.inputHistories.push({raceNumber: this.raceNumber, letterLabels: letterLabels});
 
-            this.inputUmaNameList.push(this.currentInputUmaName);
+            this.raceNumber += 1;
         },
     }
 });

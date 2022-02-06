@@ -13,7 +13,7 @@
     <script src="data/extractdata3.js"></script>
 
     <style rel="stylesheet">
-      span.matchLetter
+      span.MatchLetter
       {
         margin: 2px;
         padding: 10px;
@@ -22,7 +22,7 @@
         color: white;
         font-family: monospace;
       }
-      span.nullLetter
+      span.NullLetter
       {
         margin: 2px;
         padding: 10px;
@@ -31,7 +31,7 @@
         color: white;
         font-family: monospace;
       }
-      span.nearLetter
+      span.NearLetter
       {
         margin: 2px;
         padding: 10px;
@@ -40,7 +40,7 @@
         color: white;
         font-family: monospace;
       }
-      span.noneLetter
+      span.MissLetter
       {
         margin: 2px;
         padding: 10px;
@@ -70,9 +70,9 @@
           <div class="row">
               <div class="col">
                   <p id="message">{{message}}</p>
-                  <p id="okWord"><span class="matchLetter">ナ</span><span class="matchLetter">リ</span><span class="nullLetter">？</span></p>
-                  <p id="nearWord"><span class="nearLetter">あ</span></p>
-                  <p id="ngWord"><span class="noneLetter">う</span></p>
+                  <p><span class="MatchLetter">ナ</span><span class="MatchLetter">リ</span><span class="NullLetter">？</span></p>
+                  <p><span class="NearLetter">あ</span></p>
+                  <p><span class="MissLetter">う</span></p>
                 </div>
           </div>
           <div class="row">
@@ -87,11 +87,6 @@
           </div>
           <div class="row">
             <div class="col">
-              <ol>
-                <li v-for="umaName in inputUmaNameList">
-                  {{umaName}}
-                </li>
-              </ol>  
             </div>
           </div>
       </div>
