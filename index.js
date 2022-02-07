@@ -10,9 +10,9 @@ function getRandomIntInclusive(min, max)
 //  存在している馬名かどうかを返す
 function isExistingUmaName(umaName)
 {
-    for(var listUmaName of allUmaData)
+    for(var listUmaData of allUmaData)
     {
-        if(listUmaName == umaName)
+        if(listUmaData[0] == umaName)
         {
             return true;
         }
@@ -76,6 +76,7 @@ var app = new Vue({
         message: "",    //  ユーザーへのメッセージ
         messageStyle: "",   //  メッセージの就職方法
         targetUmaName: "Uma",   //  答えの馬の名前
+        targetRaceName: "", //  答えの馬の勝利したレース名（ヒント）
         raceNumber: 1,  //  レース番号、最大12Rまで
         raceEnabled: true,  //  ゲームが実行可能かどうか
         currentInputUmaName: "",  //  現在入力された馬の名前
@@ -91,7 +92,9 @@ var app = new Vue({
         setTargetUma: function()
         {
             var randomNumber = getRandomIntInclusive(0, allUmaData.length - 1);
-            this.targetUmaName = allUmaData[randomNumber];
+            var targetUmaData = allUmaData[randomNumber];
+            this.targetUmaName = targetUmaData[0];
+            this.targetRaceName = targetUmaData[1];
         },
 
         //  ゲームを初期化する関数
@@ -147,6 +150,12 @@ var app = new Vue({
             {
                 this.hintVisibility = "visible";
                 this.hintMessage = this.targetUmaName.length + "文字";
+            }
+
+            if(this.raceNumber >= 9)
+            {
+                this.hintVisibility = "visible";
+                this.hintMessage = this.targetRaceName + " " + this.targetUmaName.length + "文字";
             }
 
             if(this.raceNumber > 12)
