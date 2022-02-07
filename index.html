@@ -44,7 +44,7 @@
       {
         margin: 2px;
         padding: 10px;
-        background-color: lightgrey;
+        background-color: grey;
         border: 1px solid black;
         color: white;
         font-family: monospace;
@@ -57,36 +57,49 @@
       <div id="app" class="container">
           <div class="row">
               <div class="col">
-                <h1>Umardle</h1>
-                <p>WordleのG1勝利馬バージョン（※1984年以降の芝・ダートG1レースのみ）</p>
-                <p>答え：{{targetUmaName}}</p>
-              </div>
-          </div>
-          <div class="row">
-            <h2 class="col">
-                <button type="button" class="btn btn-primary" v-on:click="reset">最初から</button>
-            </h2>
-          </div>
-          <div class="row">
-              <div class="col">
-                  <p id="message">{{message}}</p>
-                  <p><span class="MatchLetter">ナ</span><span class="MatchLetter">リ</span><span class="NullLetter">？</span></p>
-                  <p><span class="NearLetter">あ</span></p>
-                  <p><span class="MissLetter">う</span></p>
-                </div>
-          </div>
-          <div class="row">
-              <div class="col">
-                  <h2 id="raceNumberName">第{{raceNumber}}レース</h2>
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="馬名（カタカナ2～9文字）" v-model="currentInputUmaName">
-                    <button class="btn btn-outline-primary" type="button" v-on:click="checkInput">出走</button>
-                  </div>
-                  <p>{{currentInputUmaName}}</p>
+                <h1 class="text-center">Umardle</h1>
+                <p class="text-center">Wordleの国内G1勝利馬バージョン（※1984年以降の国内G1レースのみ、障害競争は除く）</p>
               </div>
           </div>
           <div class="row">
             <div class="col">
+              <p class="text-center"><button type="button" class="btn btn-primary" v-on:click="reset">最初から</button></p>                
+                <p>答え：{{targetUmaName}}</p>
+            </div>
+          </div>
+          <div class="row">
+          </div>
+          <div class="row">
+              <div class="col">
+                  <p class="fs-2">第{{raceNumber}}レース</p>
+                  <p>
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="馬名（カタカナ2～9文字）" v-model="currentInputUmaName">
+                      <button class="btn btn-outline-primary" type="button" v-on:click="checkInput">出走</button>
+                    </div>  
+                  </p>
+                  <p v-bind:class="messageStyle">{{message}}</p>
+              </div>
+          </div>          
+          <div class="row">
+            <div class="col">
+              <p><span class="MatchLetter">ナ</span><span class="MatchLetter">リ</span><span class="NullLetter">？</span></p>
+              <p><span class="NearLetter">あ</span></p>
+              <p><span class="MissLetter">う</span></p>
+              <p>
+                <letter-component
+                  v-for="letter in latestLetterLabels"
+                  v-bind:key="letter.index"
+                  v-bind:class="letter.label"
+                  v-bind:letter="letter.letter"
+                ></letter-component>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">              
+              <p>元ネタ：<a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a></p>
+              <p>作った人：@kuirui_monokaki</p>
             </div>
           </div>
       </div>

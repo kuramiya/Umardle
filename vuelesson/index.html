@@ -17,6 +17,25 @@
                   v-bind:key="item.id"
                 ></todo-item>
             </ol>
+            <p>
+                <my-item
+                    v-for="item in testList"
+                    v-bind:key="item.index"
+                    v-bind:a="item.a"
+                    v-bind:b="item.b"
+                >
+                </my-item>
+            </p>
+            <p>
+                <letter-component
+                  v-for="letter in testLetters"
+                  v-bind:key="letter.index"
+                  v-bind:label="letter.label"
+                  v-bind:x="letter.x"
+                  v-bind:num="letter.num"
+                >
+                </letter-component>                                
+            </p>
         </div>
         
         <script src="index.js"></script>

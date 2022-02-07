@@ -32,19 +32,19 @@ function getUmaNameMatchLabels(targetUmaName, inputUmaName)
 
         if(targetLetter === undefined)
         {
-            letterLabels.push({index: i, letter: inputLetter, label: "Miss"});
+            letterLabels.push({index: i, letter: inputLetter, label: "MissLetter"});
         }
         else if(inputLetter == targetLetter)
         {
-            letterLabels.push({index: i, letter: inputLetter, label: "Match"});
+            letterLabels.push({index: i, letter: inputLetter, label: "MatchLetter"});
         }
         else if(targetUmaName.indexOf(inputLetter) > 0)
         {
-            letterLabels.push({index: i, letter: inputLetter, label: "Near"});
+            letterLabels.push({index: i, letter: inputLetter, label: "NearLetter"});
         }
         else
         {
-            letterLabels.push({index: i, letter: inputLetter, label: "Miss"});
+            letterLabels.push({index: i, letter: inputLetter, label: "MissLetter"});
         }
     }
 
@@ -54,9 +54,9 @@ function getUmaNameMatchLabels(targetUmaName, inputUmaName)
 //  文字表示用のコンポーネント
 Vue.component("letter-component",
 {
-    props: ["label", "inputLetter"],
-    template: '<span class="{{label}}Letter">{{inputLetter}}</span>',
-})
+    props: ["label", "letter"],
+    template: '<span>{{letter}}</span>',
+});
 
 //  Vueのオブジェクト
 var app = new Vue({ 
@@ -64,18 +64,20 @@ var app = new Vue({
     data:
     {
         message: "",    //  ユーザーへのメッセージ
+        messageStyle: "",   //  メッセージの就職方法
         targetUmaName: "Uma",   //  答えの馬の名前
         raceNumber: 1,  //  レース番号、最大12Rまで
         currentInputUmaName: "",  //  現在入力された馬の名前
+        latestLetterLabels: [], //  最新のラベル
         inputHistories: [],   //  入力履歴
         matchLetters: [],
         nearLetters: [],
         missLetters: [],
-        xxxLetters:
+        testLetters:
         [
-            {index: 0, letter: "ナ", label: "Match"},
-            {index: 1, letter: "リ", label: "Match"},
-            {index: 2, letter: "タ", label: "Near"},
+            {index: 0, letter: "ナ", label: "MatchLetter"},
+            {index: 1, letter: "リ", label: "MatchLetter"},
+            {index: 2, letter: "タ", label: "NearLetter"},
         ],
     },
     methods:
@@ -102,17 +104,19 @@ var app = new Vue({
 
             if(exists)
             {
-                this.message = "存在する馬名です";
+                this.message = "";
+                this.messageStyle = "";
             }
             else
             {
-                this.message = "エラー、存在しない馬名です";
+                this.message = "入力エラー、対象にない馬名です";
+                this.messageStyle = "text-danger";
                 return;
             }
 
             var letterLabels = getUmaNameMatchLabels(this.targetUmaName, this.currentInputUmaName);
 
-            this.message = letterLabels;
+            this.latestLetterLabels = letterLabels;
             this.inputHistories.push({raceNumber: this.raceNumber, letterLabels: letterLabels});
 
             this.raceNumber += 1;

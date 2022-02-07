@@ -50,3 +50,12 @@ https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Ma
 ### リストに挿入する
 https://maku77.github.io/js/array/push.html
 
+## Bootstrap基礎
+https://getbootstrap.jp/docs/5.0/getting-started/introduction/
+
+### 文字サイズについて
+https://getbootstrap.jp/docs/5.0/utilities/text/#font-size
+
+
+
+
