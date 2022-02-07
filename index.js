@@ -30,17 +30,18 @@ function getUmaNameMatchLabels(targetUmaName, inputUmaName)
         var inputLetter = inputUmaName[i];
         var targetLetter = targetUmaName[i];
 
-        if(targetLetter === undefined)
+        //  まず最初にその文字が存在するかどうかチェックする
+        if(targetUmaName.indexOf(inputLetter) >= 0)
         {
-            letterLabels.push({index: i, letter: inputLetter, label: "MissLetter"});
-        }
-        else if(inputLetter == targetLetter)
-        {
-            letterLabels.push({index: i, letter: inputLetter, label: "MatchLetter"});
-        }
-        else if(targetUmaName.indexOf(inputLetter) > 0)
-        {
-            letterLabels.push({index: i, letter: inputLetter, label: "NearLetter"});
+            //  存在している場合、場所が一致するかチェックする
+            if(inputLetter == targetLetter)
+            {
+                letterLabels.push({index: i, letter: inputLetter, label: "MatchLetter"});
+            }
+            else
+            {
+                letterLabels.push({index: i, letter: inputLetter, label: "NearLetter"});
+            }
         }
         else
         {
@@ -109,7 +110,15 @@ var app = new Vue({
             this.inputHistories = [];
             this.hintVisibility = "invisible";    //  ヒントの表示状態
             this.hintMessage = "";    //  ヒント文字列
-            },
+        },
+
+        //  諦めて答えを表示する
+        giveUp: function()
+        {
+            this.raceEnabled = false;
+            this.message = "本日のレースは終了しました……。（答え：" + this.targetUmaName + "）";
+            this.messageStyle = "alert alert-dark";
+        },
 
         //  入力をチェックする関数
         checkInput: function()
