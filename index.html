@@ -17,7 +17,7 @@
       {
         margin: 2px;
         padding: 10px;
-        background-color: rgb(87, 199, 92);
+        background-color: rgb(27, 197, 35);
         border: 1px solid transparent;
         color: white;
         font-family: monospace;
@@ -35,7 +35,7 @@
       {
         margin: 2px;
         padding: 10px;
-        background-color: rgb(240, 192, 62);
+        background-color: rgb(235, 184, 44);
         border: 1px solid transparent;
         color: white;
         font-family: monospace;
@@ -44,7 +44,7 @@
       {
         margin: 2px;
         padding: 10px;
-        background-color: grey;
+        background-color: rgb(124, 124, 124);
         border: 1px solid transparent;
         color: white;
         font-family: monospace;
@@ -56,7 +56,7 @@
   <body>
       <div id="app" class="container">
           <div class="row">
-              <div class="col text-center">
+              <div class="col">
                 <h1>Umardle</h1>
                 <p>Wordleの国内G1勝利馬バージョン</p>
                 <p>（※1984～2021年の国内G1レースのみ、障害競争は除く）</p>
@@ -64,7 +64,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <p class="text-center"><button type="button" class="btn btn-primary" v-on:click="reset">最初から</button></p>                
+              <p><button type="button" class="btn btn-primary" v-on:click="reset">最初から</button></p>                
               <!-- <p>答え：{{targetUmaName}}</p> -->
             </div>
           </div>
@@ -74,7 +74,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col">
+            <div class="col-auto">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="馬名（カタカナ2～9文字）" v-model="currentInputUmaName">
                 <button class="btn btn-primary" type="button" v-bind:disabled="!raceEnabled" v-on:click="checkInput">出走</button>
@@ -82,8 +82,9 @@
           </div>
           </div>          
           <div class="row">
-            <div class="col">
+            <div class="col">              
               <p v-bind:class="messageStyle">{{message}}</p>
+              <p v-bind:class="hintVisibility"><span class="badge bg-info">ヒント</span> {{hintMessage}}</p>
               <p v-for="history in inputHistories" v-bind:key="history.racenumber">
                 <letter-component
                   v-for="letter in history.letterlabels"
@@ -95,11 +96,11 @@
             </div>
           </div>
           <div class="row">
-            <div class="col text-center">
+            <div class="col">
               <p>元ネタ：<a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a></p>
               <p>データ出典：<a href="https://www.jra.go.jp/datafile/seiseki/replay/2021/g1.html">重賞レース一覧（G1） 2021年 - JRA</a></p>
               <p>バージョン：1</p>
-              <p>作った人：@kuirui_monokaki</p>
+              <p>作った人：<a href="https://twitter.com/kuirui_monokaki">@kuirui_monokaki</a></p>
             </div>
           </div>
       </div>

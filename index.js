@@ -82,14 +82,16 @@ var app = new Vue({
         inputHistories: [],   //  入力履歴
         nearLetters: [],
         missLetters: [],
+        hintVisibility: "invisible",    //  ヒントの表示状態
+        hintMessage: "",    //  ヒント文字列
     },
     methods:
     {
         //  答えの馬を設定する関数
         setTargetUma: function()
         {
-            this.randomNumber = getRandomIntInclusive(0, allUmaData.length - 1);
-            this.targetUmaName = allUmaData[this.randomNumber];
+            var randomNumber = getRandomIntInclusive(0, allUmaData.length - 1);
+            this.targetUmaName = allUmaData[randomNumber];
         },
 
         //  ゲームを初期化する関数
@@ -102,7 +104,9 @@ var app = new Vue({
             this.messageStyle = "";
             this.currentInputUmaName = "";
             this.inputHistories = [];
-        },
+            this.hintVisibility = "invisible";    //  ヒントの表示状態
+            this.hintMessage = "";    //  ヒント文字列
+            },
 
         //  入力をチェックする関数
         checkInput: function()
@@ -120,7 +124,7 @@ var app = new Vue({
             else
             {
                 this.message = "入力エラー。リストにない馬名です。";
-                this.messageStyle = "text-danger";
+                this.messageStyle = "alert alert-warning";
                 return;
             }
 
@@ -132,19 +136,25 @@ var app = new Vue({
             {
                 this.raceEnabled = false;
                 this.message = "正解しました！　おめでとうございます！";
-                this.messageStyle = "text-success";
+                this.messageStyle = "alert alert-success";
                 return;
             }
 
             this.currentInputUmaName = "";
             this.raceNumber += 1;
 
+            if(this.raceNumber >= 6)
+            {
+                this.hintVisibility = "visible";
+                this.hintMessage = this.targetUmaName.length + "文字";
+            }
+
             if(this.raceNumber > 12)
             {
                 this.racenumber = 12;
                 this.raceEnabled = false;
                 this.message = "本日のレースは終了しました……。（答え：" + this.targetUmaName + "）";
-                this.messageStyle = "text-danger";
+                this.messageStyle = "alert alert-dark";
             }
         },
     }
