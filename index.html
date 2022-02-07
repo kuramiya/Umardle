@@ -18,7 +18,7 @@
         margin: 2px;
         padding: 10px;
         background-color: rgb(87, 199, 92);
-        border: 1px solid black;
+        border: 1px solid transparent;
         color: white;
         font-family: monospace;
       }
@@ -36,7 +36,7 @@
         margin: 2px;
         padding: 10px;
         background-color: rgb(240, 192, 62);
-        border: 1px solid black;
+        border: 1px solid transparent;
         color: white;
         font-family: monospace;
       }
@@ -45,7 +45,7 @@
         margin: 2px;
         padding: 10px;
         background-color: grey;
-        border: 1px solid black;
+        border: 1px solid transparent;
         color: white;
         font-family: monospace;
       }
@@ -56,49 +56,48 @@
   <body>
       <div id="app" class="container">
           <div class="row">
-              <div class="col">
-                <h1 class="text-center">Umardle</h1>
-                <p class="text-center">Wordleの国内G1勝利馬バージョン（※1984年以降の国内G1レースのみ、障害競争は除く）</p>
+              <div class="col text-center">
+                <h1>Umardle</h1>
+                <p>Wordleの国内G1勝利馬バージョン（※1984～2021年の国内G1レースのみ、障害競争は除く）</p>
               </div>
           </div>
           <div class="row">
             <div class="col">
               <p class="text-center"><button type="button" class="btn btn-primary" v-on:click="reset">最初から</button></p>                
-                <p>答え：{{targetUmaName}}</p>
+              <!-- <p>答え：{{targetUmaName}}</p> -->
             </div>
           </div>
           <div class="row">
+            <div class="col">
+              <p class="fs-2">第{{raceNumber}}レース</p>
+            </div>
           </div>
           <div class="row">
-              <div class="col">
-                  <p class="fs-2">第{{raceNumber}}レース</p>
-                  <p>
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="馬名（カタカナ2～9文字）" v-model="currentInputUmaName">
-                      <button class="btn btn-outline-primary" type="button" v-on:click="checkInput">出走</button>
-                    </div>  
-                  </p>
-                  <p v-bind:class="messageStyle">{{message}}</p>
-              </div>
+            <div class="col-6">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="馬名（カタカナ2～9文字）" v-model="currentInputUmaName">
+                <button class="btn btn-primary" type="button" v-bind:disabled="!raceEnabled" v-on:click="checkInput">出走</button>
+              </div>  
+          </div>
           </div>          
           <div class="row">
             <div class="col">
-              <p><span class="MatchLetter">ナ</span><span class="MatchLetter">リ</span><span class="NullLetter">？</span></p>
-              <p><span class="NearLetter">あ</span></p>
-              <p><span class="MissLetter">う</span></p>
-              <p v-for="history in inputHistories" v-bind:key="history.racenumber">                
+              <p v-bind:class="messageStyle">{{message}}</p>
+              <p v-for="history in inputHistories" v-bind:key="history.racenumber">
                 <letter-component
                   v-for="letter in history.letterlabels"
                   v-bind:key="letter.index"
                   v-bind:class="letter.label"
                   v-bind:letter="letter.letter"
-                ></letter-component>                
+                ></letter-component>
               </p>
             </div>
           </div>
           <div class="row">
-            <div class="col">              
+            <div class="col text-center">
               <p>元ネタ：<a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a></p>
+              <p>データ出典：<a href="https://www.jra.go.jp/datafile/seiseki/replay/2021/g1.html">重賞レース一覧（G1） 2021年 - JRA</a></p>
+              <p>バージョン：1</p>
               <p>作った人：@kuirui_monokaki</p>
             </div>
           </div>

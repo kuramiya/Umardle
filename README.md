@@ -5,6 +5,8 @@ Wordle uma version
 
 [開始・リセットボタン]
 
+[テキストボックス][実行ボタン]
+
 第1レース：入力履歴
 
 第2レース：入力履歴
@@ -12,8 +14,6 @@ Wordle uma version
 ・・・
 
 第Xレース
-
-[テキストボックス][実行ボタン]
 
 惜しい文字
 
@@ -36,9 +36,6 @@ Wordle uma version
 ### G1レース勝利馬
 https://www.jra.go.jp/datafile/seiseki/replay/2022/g1.html
 
-### Vue.js
-https://jp.vuejs.org/v2/guide/index.html
-
 ## JavaScript基礎
 
 ### コメント
@@ -50,12 +47,19 @@ https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Ma
 ### リストに挿入する
 https://maku77.github.io/js/array/push.html
 
+### 配列（Array）について
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array
+
 ## Bootstrap基礎
 https://getbootstrap.jp/docs/5.0/getting-started/introduction/
 
 ### 文字サイズについて
 https://getbootstrap.jp/docs/5.0/utilities/text/#font-size
 
+## Vue.js基礎
+https://jp.vuejs.org/v2/guide/index.html
 
+### コンポーネントの繰り返し
+https://stackoverflow.com/questions/50272082/nested-v-for-loops-in-a-vue-components
 
 

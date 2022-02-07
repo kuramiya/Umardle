@@ -51,6 +51,16 @@ function getUmaNameMatchLabels(targetUmaName, inputUmaName)
     return letterLabels;
 }
 
+//  すべてが一致しているラベル群かどうかを返す
+function isAllLabelMatched(letterLabels)
+{
+    for(letterLabel of letterLabels)
+    {
+        if(letterLabel.label != "MatchLetter") return false;
+    }
+    return true;
+}
+
 //  文字表示用のコンポーネント
 Vue.component("letter-component",
 {
@@ -67,17 +77,11 @@ var app = new Vue({
         messageStyle: "",   //  メッセージの就職方法
         targetUmaName: "Uma",   //  答えの馬の名前
         raceNumber: 1,  //  レース番号、最大12Rまで
+        raceEnabled: true,  //  ゲームが実行可能かどうか
         currentInputUmaName: "",  //  現在入力された馬の名前
         inputHistories: [],   //  入力履歴
-        matchLetters: [],
         nearLetters: [],
         missLetters: [],
-        testLetters:
-        [
-            {index: 0, letter: "ナ", label: "MatchLetter"},
-            {index: 1, letter: "リ", label: "MatchLetter"},
-            {index: 2, letter: "タ", label: "NearLetter"},
-        ],
     },
     methods:
     {
@@ -93,11 +97,18 @@ var app = new Vue({
         {
             this.setTargetUma();    //  答えの馬の設定
             this.raceNumber = 1;    //  レース番号の初期化
+            this.raceEnabled = true;
+            this.message = "";
+            this.messageStyle = "";
+            this.currentInputUmaName = "";
+            this.inputHistories = [];
         },
 
         //  入力をチェックする関数
         checkInput: function()
         {
+            if(this.raceEnabled == false) return;
+
             //  存在する馬名かどうかチェックする
             var exists = isExistingUmaName(this.currentInputUmaName);
 
@@ -108,7 +119,7 @@ var app = new Vue({
             }
             else
             {
-                this.message = "入力エラー、対象にない馬名です";
+                this.message = "入力エラー。リストにない馬名です。";
                 this.messageStyle = "text-danger";
                 return;
             }
@@ -117,7 +128,24 @@ var app = new Vue({
 
             this.inputHistories.push({racenumber: this.raceNumber, letterlabels: letterLabels});
 
+            if(isAllLabelMatched(letterLabels))
+            {
+                this.raceEnabled = false;
+                this.message = "正解しました！　おめでとうございます！";
+                this.messageStyle = "text-success";
+                return;
+            }
+
+            this.currentInputUmaName = "";
             this.raceNumber += 1;
+
+            if(this.raceNumber > 12)
+            {
+                this.racenumber = 12;
+                this.raceEnabled = false;
+                this.message = "本日のレースは終了しました……。（答え：" + this.targetUmaName + "）";
+                this.messageStyle = "text-danger";
+            }
         },
     }
 });
