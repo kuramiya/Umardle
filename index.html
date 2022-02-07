@@ -80,12 +80,16 @@
                 <button class="btn btn-primary" type="button" v-bind:disabled="!raceEnabled" v-on:click="checkInput">出走</button>
               </div>  
           </div>
-          </div>          
+          </div>
           <div class="row">
-            <div class="col">              
+            <div class="col">
               <p v-bind:class="messageStyle">{{message}}</p>
               <p v-bind:class="hintVisibility"><span class="badge bg-info">ヒント</span> {{hintMessage}}</p>
-              <p v-for="history in inputHistories" v-bind:key="history.racenumber">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p class="my-4" v-for="history in inputHistories" v-bind:key="history.racenumber">
                 <letter-component
                   v-for="letter in history.letterlabels"
                   v-bind:key="letter.index"
