@@ -68,7 +68,6 @@ var app = new Vue({
         targetUmaName: "Uma",   //  答えの馬の名前
         raceNumber: 1,  //  レース番号、最大12Rまで
         currentInputUmaName: "",  //  現在入力された馬の名前
-        latestLetterLabels: [], //  最新のラベル
         inputHistories: [],   //  入力履歴
         matchLetters: [],
         nearLetters: [],
@@ -116,8 +115,7 @@ var app = new Vue({
 
             var letterLabels = getUmaNameMatchLabels(this.targetUmaName, this.currentInputUmaName);
 
-            this.latestLetterLabels = letterLabels;
-            this.inputHistories.push({raceNumber: this.raceNumber, letterLabels: letterLabels});
+            this.inputHistories.push({racenumber: this.raceNumber, letterlabels: letterLabels});
 
             this.raceNumber += 1;
         },
