@@ -13,37 +13,29 @@
     <script src="data/extractdata4.js"></script>
 
     <style rel="stylesheet">
-      span.MatchLetter
+      div.MatchLetter
       {
-        margin: 2px;
-        padding: 10px;
         background-color: rgb(27, 197, 35);
         border: 1px solid transparent;
         color: white;
         font-family: monospace;
       }
-      span.NullLetter
+      div.NullLetter
       {
-        margin: 2px;
-        padding: 10px;
         background-color: white;
         border: 1px solid black;
         color: white;
         font-family: monospace;
       }
-      span.NearLetter
+      div.NearLetter
       {
-        margin: 2px;
-        padding: 10px;
         background-color: rgb(235, 184, 44);
         border: 1px solid transparent;
         color: white;
         font-family: monospace;
       }
-      span.MissLetter
+      div.MissLetter
       {
-        margin: 2px;
-        padding: 10px;
         background-color: rgb(124, 124, 124);
         border: 1px solid transparent;
         color: white;
@@ -102,14 +94,14 @@
           </div>
           <div class="row">
             <div class="col">
-              <p class="my-4" v-for="history in inputHistories" v-bind:key="history.racenumber">
+              <div class="row" v-for="history in inputHistories" v-bind:key="history.racenumber">
                 <letter-component
                   v-for="letter in history.letterlabels"
                   v-bind:key="letter.index"
                   v-bind:class="letter.label"
                   v-bind:letter="letter.letter"
                 ></letter-component>
-              </p>
+              </div>
             </div>
           </div>
           <div class="row">

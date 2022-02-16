@@ -66,7 +66,7 @@ function isAllLabelMatched(letterLabels)
 Vue.component("letter-component",
 {
     props: ["label", "letter"],
-    template: '<span>{{letter}}</span>',
+    template: '<div class="col p-2 m-1">{{letter}}</div>',
 });
 
 //  Vueのオブジェクト
