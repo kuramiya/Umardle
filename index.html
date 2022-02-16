@@ -94,7 +94,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <div class="row" v-for="history in inputHistories" v-bind:key="history.racenumber">
+              <div class="row mb-2" v-for="history in inputHistories" v-bind:key="history.racenumber">
                 <letter-component
                   v-for="letter in history.letterlabels"
                   v-bind:key="letter.index"
@@ -109,7 +109,7 @@
               <p>※外国馬の場合、10文字以上となるケースがあります。</p>
               <p>元ネタ：<a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a></p>
               <p>データ出典：<a href="https://www.jra.go.jp/datafile/seiseki/replay/2021/g1.html">重賞レース一覧（G1） 2021年 - JRA</a></p>
-              <p>バージョン：3（表記修正）</p>
+              <p>更新：2022/02/16 長い字数の場合に表示が重なる問題を修正。</p>
               <p>作った人：<a href="https://twitter.com/kuirui_monokaki">@kuirui_monokaki</a></p>
             </div>
           </div>
